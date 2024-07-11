@@ -2,6 +2,82 @@
 <html lang="en"> 
 
 <head>
+<!-- Google analytics -->
+<script>
+  console.log('Script started');
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { 
+    console.log('gtag called with arguments:', arguments);
+    dataLayer.push(arguments); 
+  }
+
+  // Set default consent
+  console.log('Setting default consent');
+  gtag('consent', 'default', {
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'denied',
+    'security_storage': 'denied',
+    'wait_for_update': 500,
+  });
+
+  gtag('js', new Date());
+  gtag('config', 'G-XQ18JLWEXZ');
+
+  function updateCookies(consent) {
+    console.log('updateCookies called with consent:', consent);
+    const cookieBanner = document.getElementById("wncCookieBanner");
+    cookieBanner.classList.remove("wnc-cookie-show");
+    cookieBanner.classList.add("wnc-cookie-hidden");
+    setConsent(consent);
+  }
+
+  function setConsent(consent) {
+    console.log('setConsent called with consent:', consent);
+    const wncCookieConsentMode = {
+      ad_user_data: consent ? 'granted' : 'denied',
+      ad_personalization: 'denied',
+      ad_storage: 'denied',
+      analytics_storage: consent ? 'granted' : 'denied',
+      functionality_storage: consent ? 'granted' : 'denied',
+      security_storage: consent ? 'granted' : 'denied',
+    };
+    console.log('Updating consent with:', wncCookieConsentMode);
+    gtag('consent', 'update', wncCookieConsentMode);
+    localStorage.setItem("wncCookieConsentMode", JSON.stringify(wncCookieConsentMode));
+    console.log('Consent saved to localStorage');
+  }
+
+  window.onload = () => {
+    console.log('Window loaded');
+    const cookieBanner = document.getElementById("wncCookieBanner");
+    const storedConsent = localStorage.getItem("wncCookieConsentMode");
+
+    if (storedConsent === null) {
+      console.log('No stored consent found, showing banner');
+      cookieBanner.classList.remove("wnc-cookie-hidden");
+      cookieBanner.classList.add("wnc-cookie-show");
+    } else {
+      console.log('Stored consent found:', storedConsent);
+      gtag('consent', 'update', JSON.parse(storedConsent));
+    }
+  };
+
+  // Load gtag.js script
+  console.log('Loading gtag.js script');
+  var gtagScript = document.createElement('script');
+  gtagScript.async = true;
+  gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XQ18JLWEXZ';
+
+  var firstScript = document.getElementsByTagName('script')[0];
+  firstScript.parentNode.insertBefore(gtagScript, firstScript);
+
+  console.log('Script execution completed');
+</script>
+<!-- Over Google analytics -->
 
   <!--  // This code adds a meta tag to the header of the HTML document to tell
   // the browser that the document is encoded in UTF-8. It also sets the
@@ -766,6 +842,33 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Cookie banner -->
+  <div class="wnc-cookie-banner wnc-cookie-hidden" id="wncCookieBanner">
+    <div class="wnc-cookie-banner-container">
+      <p class="wnc-cookie-title">
+        We use cookies on this site to enhance your user experience
+      </p>
+  
+      <p>
+        By clicking the Accept button, you agree to us doing so. More info on our
+        <a href="https://policies.google.com/technologies/cookies?hl=en-US" class="wnc-cookie-link">cookie policy</a>
+      </p>
+  
+      <div class="wnc-cookie-buttons">
+        <div>
+          <button class="wnc-cookie-button" onclick="updateCookies(true)">
+            Accept all cookies
+          </button>
+        </div>
+        <div>
+          <button class="wnc-cookie-button" onclick="updateCookies(false)">
+            Reject all cookies
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- over cookie banner -->
 </body>
 
 </html>
