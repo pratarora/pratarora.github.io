@@ -61,6 +61,17 @@
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
 
+  // Highlight last nav item if at bottom of page
+  window.addEventListener('scroll', () => {
+    navbarlinksActive();
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      document.querySelectorAll('#navbar .nav-link').forEach(function(navLink) {
+        navLink.classList.remove('active');
+      });
+      document.querySelector('#navbar .nav-link[href="#contact"]').classList.add('active');
+    }
+  });
+
   /**
    * Scrolls to an element with header offset
    */
