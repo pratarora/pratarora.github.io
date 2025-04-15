@@ -837,212 +837,173 @@ section { /* this is a code for the section */
 }
 
 /*--------------------------------------------------------------
-# Contact
+# Contact Section - Updated Styling (Two Boxes, Consistent Icons)
 --------------------------------------------------------------*/
 .contact {
-  padding-bottom: 130px;
+  padding-bottom: 80px;
 }
 
-.contact .info {
+/* Styling for BOTH info boxes on the left */
+.contact .info-box {
   padding: 30px;
   background: #fff;
-  width: 100%;
-  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+  width: 100%; /* Ensure boxes take full column width */
 }
 
-.contact .info i {
+/* Use flex column on the parent col to stack boxes and add gap */
+#contact .col-lg-5.d-flex.flex-column {
+    gap: 30px; /* Adjust the space between the two boxes */
+}
+
+/* Styling specific to items WITHIN the info boxes */
+.contact .info-item {
+  width: 100%;
+}
+
+/* --- Icon Styling (Consistent for both boxes) --- */
+
+/* Base style for Location, Email, Website Icons */
+.contact .info-item i {
   font-size: 20px;
-  color: #149ddd;
-  float: left;
+  color: #149ddd;      /* Icon Color */
+  background: #dff3fc;  /* Background Circle */
   width: 44px;
   height: 44px;
-  background: #dff3fc;
+  min-width: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50px;
+  border-radius: 50%;   /* Shape */
   transition: all 0.3s ease-in-out;
+  margin-right: 15px; /* Space between icon and text */
 }
 
-.contact .info h4 {
-  padding: 0 0 0 60px;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 5px;
+/* Base style for Social Media Icons */
+.contact .social-icon-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #149ddd;      /* Icon Color - MATCHES */
+  background: #dff3fc;  /* Background Circle - MATCHES */
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;   /* Shape - MATCHES */
+  transition: all 0.3s ease-in-out; /* Transition - MATCHES */
+}
+/* Ensure icon within the link aligns properly */
+.contact .social-icon-link i {
+  line-height: 1;
+  /* Prevent inheriting unwanted styles if any */
+  background: none;
+  color: inherit; /* Takes color from the parent 'a' tag */
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  font-size: inherit; /* Takes size from the parent 'a' tag */
+}
+
+/* Hover effect for Location, Email, Website Icons */
+.contact .info-item:hover > i {
+  background: #149ddd; /* Dark Blue Background */
+  color: #fff;         /* White Icon */
+}
+
+/* Hover effect for Social Media Icons */
+.contact .social-icon-link:hover {
+  background: #149ddd; /* Dark Blue Background - MATCHES HOVER */
+  color: #fff;         /* This sets the color property FOR THE LINK, icons inherit */
+}
+/* Explicitly ensure the icon itself turns white on hover */
+.contact .social-icon-link:hover i {
+   color: #fff !important; /* White Icon - MATCHES HOVER */
+}
+
+/* --- Text Styling within Info Boxes --- */
+.contact .info-box h3 { /* Applies to "Location", "Email", "Website", and "Follow Me" */
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
   color: #050d18;
 }
+/* Specific alignment/margin for "Follow Me" title */
+.contact .info-box h3.text-center {
+  margin-bottom: 20px; /* More space below "Follow Me" title */
+}
 
-.contact .info p {
-  padding: 0 0 10px 60px;
-  margin-bottom: 20px;
+.contact .info-item p { /* Paragraphs in the first box */
+  padding: 0;
+  margin: 0;
+  line-height: 1.6;
   font-size: 14px;
-  color: #173b6c;
+  color: #444444;
 }
-
-.contact .info .email p {
-  padding-top: 5px;
-}
-
-.contact .info .social-links {
-  padding-left: 60px;
-}
-
-.contact .info .social-links a {
-  font-size: 18px;
-  display: inline-block;
-  background: #333;
-  color: #fff;
-  line-height: 1;
-  padding: 8px 0;
-  border-radius: 50%;
-  text-align: center;
-  width: 36px;
-  height: 36px;
+.contact .info-item p a {
+  color: #444444;
   transition: 0.3s;
-  margin-right: 10px;
+}
+.contact .info-item p a:hover {
+ color: #149ddd;
 }
 
-.contact .info .social-links a:hover {
-  background: #149ddd;
-  color: #fff;
-}
 
-.contact .info .email:hover i,
-.contact .info .address:hover i,
-.contact .info .phone:hover i {
-  background: #149ddd;
-  color: #fff;
-}
-
+/* --- Contact Form Styling (Remains mostly the same) --- */
 .contact .php-email-form {
   width: 100%;
   padding: 30px;
   background: #fff;
-  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
-}
-
-.contact .php-email-form .form-group {
-  padding-bottom: 8px;
-}
-
-.contact .php-email-form .validate {
-  display: none;
-  color: red;
-  margin: 0 0 15px 0;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.contact .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #ed3c0d;
-  text-align: left;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .error-message br+br {
-  margin-top: 25px;
-}
-
-.contact .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #18d26e;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-}
-
-.contact .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  animation: animate-loading 1s linear infinite;
-}
-
-.contact .php-email-form .form-group {
-  margin-bottom: 15px;
-}
-
-.contact .php-email-form label {
-  padding-bottom: 8px;
-}
-
-.contact .php-email-form input,
-.contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-}
-
-.contact .php-email-form input {
-  height: 44px;
-}
-
-.contact .php-email-form textarea {
-  padding: 10px 15px;
-}
-
-.contact .php-email-form button[type=submit] {
-  background: #149ddd;
-  border: 0;
-  padding: 10px 24px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type=submit]:hover {
-  background: #37b3ed;
-}
-
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Vertically center the left contact info column */
-.contact .contact-info-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
   height: 100%;
-  min-height: 100%;
 }
-
-/* Make both contact info and social media boxes fill the same height */
+/* Add min-height to ensure form looks decent even if left col is tall */
 @media (min-width: 992px) {
-  .contact .row > .col-lg-6.d-flex {
-    min-height: 100%;
+  .contact .php-email-form {
+     min-height: calc(100% - 30px); /* Adjust based on gap */
   }
-  .contact .info {
-    height: 100%;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+   /* Ensure columns align nicely if heights differ */
+   #contact .row.gx-lg-5 {
+      align-items: stretch;
+   }
+   #contact .col-lg-5, #contact .col-lg-7 {
+      display: flex;
+      flex-direction: column;
+   }
+   #contact .col-lg-7 > form {
+      flex-grow: 1; /* Allow form to grow */
+   }
 }
 
+.contact .php-email-form .form-group { margin-bottom: 20px; }
+.contact .php-email-form input[type=text],
+.contact .php-email-form input[type=email],
+.contact .php-email-form textarea {
+  border-radius: 4px; box-shadow: none; font-size: 14px;
+  border: 1px solid #ced4da; padding: 10px 12px;
+}
+.contact .php-email-form input[type=text]:focus,
+.contact .php-email-form input[type=email]:focus,
+.contact .php-email-form textarea:focus {
+  border-color: #149ddd;
+  box-shadow: 0 0 0 0.2rem rgba(20, 157, 221, 0.25);
+}
+.contact .php-email-form input[type=text]::placeholder,
+.contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form textarea::placeholder { color: #aaa; }
+.contact .php-email-form button[type=submit] {
+  background: #149ddd; border: 0; padding: 10px 30px; color: #fff;
+  transition: 0.4s; border-radius: 50px; font-weight: 600;
+}
+.contact .php-email-form button[type=submit]:hover { background: #37b3ed; }
+.contact .php-email-form .loading { display: none; background: #fff; text-align: center; padding: 15px; }
+.contact .php-email-form .error-message { display: none; color: #fff; background: #dc3545; text-align: left; padding: 15px; font-weight: 600; border-radius: 4px; }
+.contact .php-email-form .sent-message { display: none; color: #fff; background: #198754; text-align: center; padding: 15px; font-weight: 600; border-radius: 4px; }
+.contact .php-email-form .loading:before { content: ""; display: inline-block; border-radius: 50%; width: 24px; height: 24px; margin: 0 10px -6px 0; border: 3px solid #1ce783; border-top-color: #eee; animation: animate-loading 1s linear infinite; }
+@keyframes animate-loading { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
@@ -1205,4 +1166,62 @@ section { /* this is a code for the section */
 .wnc-cookie-button:active {
   background-color: #e2ca76;
   color: black;
+}
+
+.social-media-row {
+  width: 100%;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Direct styling for the icons without extra circles */
+.social-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  background: #dff3fc; /* Single background */
+  margin-bottom: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.social-item a i {
+  font-size: 20px !important;
+  color: #149ddd !important;
+  line-height: 0 !important;
+}
+
+/* Updated hover effect to dark blue */
+.social-item a:hover {
+  background: #0e335b;
+}
+
+.social-item a:hover i {
+  color: #fff !important;
+}
+
+.social-item div {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Updated column widths for contact section */
+@media (min-width: 992px) {
+  #contact .col-lg-6:first-child {
+    flex: 0 0 auto;
+    width: 40%;
+  }
+  
+  #contact .col-lg-6:last-child {
+    flex: 0 0 auto;
+    width: 60%;
+  }
 }

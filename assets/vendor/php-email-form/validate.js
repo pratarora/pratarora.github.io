@@ -50,6 +50,34 @@
   });
 
   function php_email_form_submit(thisForm, action, formData) {
+    // Detect if using Formspree
+    if (action.includes('formspree.io')) {
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        thisForm.querySelector('.loading').classList.remove('d-block');
+        if (response.ok) {
+          thisForm.querySelector('.sent-message').classList.add('d-block');
+          thisForm.reset();
+        } else {
+          response.json().then(data => {
+            let msg = data.errors ? data.errors.map(e => e.message).join('<br>') : 'Form submission failed!';
+            displayError(thisForm, msg);
+          }).catch(() => {
+            displayError(thisForm, 'Form submission failed!');
+          });
+        }
+      })
+      .catch((error) => {
+        thisForm.querySelector('.loading').classList.remove('d-block');
+        displayError(thisForm, 'Form submission failed!');
+      });
+      return;
+    }
+    // ...existing code for PHP backend...
     fetch(action, {
       method: 'POST',
       body: formData,
