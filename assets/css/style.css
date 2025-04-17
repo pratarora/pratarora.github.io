@@ -893,6 +893,7 @@ section { /* this is a code for the section */
   min-width: 44px;
   border-radius: 50%;   /* Shape - MATCHES */
   transition: all 0.3s ease-in-out; /* Transition - MATCHES */
+  text-decoration: none !important;
 }
 /* Ensure icon within the link aligns properly */
 .contact .social-icon-link i {
@@ -1146,7 +1147,7 @@ section { /* this is a code for the section */
   color: #fff !important;
 }
 
-.social-item div {
+social-item div {
   font-size: 12px;
   text-align: center;
 }
