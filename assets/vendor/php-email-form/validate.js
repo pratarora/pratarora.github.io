@@ -10,6 +10,19 @@
 
   forms.forEach( function(e) {
     e.addEventListener('submit', function(event) {
+      // Custom anti-spam validation (honeypot and math question)
+      var websiteField = this.querySelector('#website');
+      if (websiteField && websiteField.value !== "") {
+        event.preventDefault();
+        displayError(this, 'Spam detected.');
+        return;
+      }
+      var humanCheckField = this.querySelector('#humanCheck');
+      if (humanCheckField && humanCheckField.value.trim() !== "7") {
+        event.preventDefault();
+        displayError(this, 'Please answer the anti-spam question correctly.');
+        return;
+      }
       event.preventDefault();
 
       let thisForm = this;
